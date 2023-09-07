@@ -1,0 +1,36 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: black;
+  align-items: center;
+  color: white;
+  margin-bottom: 25px;
+  height: 60px;
+}
+
+.header img {
+  max-height: 40px;
+  margin-left: 10px;
+}
+
+.header input {
+  max-width: 50%;
+  max-height: 40px;
+  flex-grow: 1;
+  margin-left: 50px;
+  margin-right: 50px;
+  padding: 10px;
+  border: none;
+  background-color: white;
+  color: black;
+}
+
+.header input:focus {
+  outline: none;
+}
+
+.header img:last-child {
+  border-radius: 50%;
+  margin-right: 10px;
+}

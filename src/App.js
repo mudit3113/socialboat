@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react'
+import Header from './components/Header'
+import Results from './components/Results'
+import apiCall from './api'
+import './App.css'
 
 function App() {
+  const [searchQuery, setSearchQuery] = useState('')
+  const [searchResults, setSearchResults] = useState([])
+
+  const handleSearch = async (query) => {
+    try {
+      if (!query) {
+        setSearchResults([])
+        return
+      }
+
+      const results = await apiCall(query)
+      setSearchResults(results)
+    } catch (error) {
+      console.error('Error fetching videos:', error)
+    }
+  }
+
+  useEffect(() => {
+    if (searchQuery) {
+      handleSearch(searchQuery)
+    }
+  }, [searchQuery])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header
+        handleSearch={handleSearch}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+      />
+      <Results searchResults={searchResults} searchQuery={searchQuery} />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
